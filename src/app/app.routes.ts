@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { MoviesComponent } from './pages/movies/movies.component';
 import { authGuard } from './guards/auth.guard';
+import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 
 export const routes: Routes = [
     {
@@ -12,5 +13,8 @@ export const routes: Routes = [
     },
     {
         path: 'movies', component: MoviesComponent, pathMatch: 'full', canActivate: [authGuard]
+    },
+    {
+        path: 'movies/:id', component: MovieDetailsComponent, canActivate: [authGuard]
     }
 ];

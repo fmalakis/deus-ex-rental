@@ -11,7 +11,13 @@ import { RouterLink } from '@angular/router';
 })
 export class MovieCardComponent {
 
+    noImg: boolean = false;
+
     @Input({ required: true })
     movie!: Movie;
+
+    onImgError() {
+        this.noImg = true;
+    }
 
 }
