@@ -1,9 +1,42 @@
-<section class="bg-slate-800 min-h-screen">
+<section class="bg-slate-800 min-h-screen p-4 dark:text-white">
     @if (movie) {
-        <h1>{{movie.title}}</h1>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="col-span-1 md:col-span-2">
+                <div class="bg-slate-700 rounded-lg p-4">
+                    <h1 class="text-3xl font-bold">{{movie.title}}</h1>
+                    <div class="inline-flex items-center content-center gap-4">
+                        <h2 class="text-xl">Published in: <b>{{movie.pub_date}}</b></h2>
+                        -
+                        <h3 class="text-xl">Rating: <b>{{movie.rating}}</b>/10</h3>
+                    </div>
+                    <h4 class="text-xl mb-2">Duration: {{durationToString(movie.duration)}}</h4>
+                    <div class="flex flex-row gap-2 mb-2">
+                        @for (category of movie.categories; track $index) {
+                        <span class="bg-slate-900 hover:bg-slate-800 px-2 rounded-lg text-lg">
+                            <a [routerLink]="['/movies']" [queryParams]="{category: category}">{{category}}</a>
+                        </span>
+                        }
+                    </div>
+                    <div>
+                        <p class="text-lg">"{{movie.description}}"</p>
+                    </div>
+                </div>
+                <button (click)="rentMovie()" [disabled]="rentingIsDisabled" class="w-full md:w-auto mt-4 p-4 bg-emerald-600 hover:bg-emerald-700 rounded-lg p-2 inline-flex items-center content-center gap-4 text-lg">Rent this
+                    movie now <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                        class="size-6">
+                        <path fill-rule="evenodd"
+                            d="M7.5 6v.75H5.513c-.96 0-1.764.724-1.865 1.679l-1.263 12A1.875 1.875 0 0 0 4.25 22.5h15.5a1.875 1.875 0 0 0 1.865-2.071l-1.263-12a1.875 1.875 0 0 0-1.865-1.679H16.5V6a4.5 4.5 0 1 0-9 0ZM12 3a3 3 0 0 0-3 3v.75h6V6a3 3 0 0 0-3-3Zm-3 8.25a3 3 0 1 0 6 0v-.75a.75.75 0 0 1 1.5 0v.75a4.5 4.5 0 1 1-9 0v-.75a.75.75 0 0 1 1.5 0v.75Z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </button>
+
+            </div>
+            <div class="bg-slate-700 rounded-lg container">
+                <img class="rounded-lg object-cover w-full h-full" [src]="movie.poster_url">
+            </div>
+
+        </div>
     } @else {
         <p>Oops, looks like this movie doesn't exist...</p>
     }
 </section>
-
-

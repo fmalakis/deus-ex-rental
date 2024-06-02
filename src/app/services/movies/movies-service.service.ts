@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class MoviesServiceService {
 
-    private API_URL = '/api/rent-store/movies/';
+    private readonly API_URL = '/api/rent-store/movies/';
+    private readonly API_URL_RENTALS = '/api/rent-store/rentals/';
 
     constructor(private http: HttpClient) { }
 
@@ -17,7 +18,11 @@ export class MoviesServiceService {
 
     getMovieById(id: string): Observable<Movie> {
         return this.http.get<Movie>(`${this.API_URL}/${id}`);
-      }
+    }
+
+    rentMovie(id: string): Observable<RentalCreationResponse> {
+        return this.http.post<RentalCreationResponse>(this.API_URL_RENTALS, {movie: id});
+    }
 }
 
 export type MovieResponse = {
@@ -27,6 +32,10 @@ export type MovieResponse = {
     results: Movie[]
 }
 
+export type RentalCreationResponse = {
+    movieId: string;
+}
+
 export type Movie = {
     uuid: string,
     title: string,
@@ -34,5 +43,6 @@ export type Movie = {
     duration: number,
     rating: string,
     description: string,
-    poster_url: string
+    poster_url: string,
+    categories: string[]
 }
