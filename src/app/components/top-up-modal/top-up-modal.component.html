@@ -1,0 +1,42 @@
+<div class="bg-slate-700 h-full p-4 flex flex-col gap-2">
+    <h1 class="text-white font-bold text-2xl md:text-3xl">Top-up your wallet</h1>
+    <h2 class="text-white text-sm md:text-lg">Not enough money to rent your favorite film? No worries, add more funds to your
+        account in one click:</h2>
+    <div>
+        <label for="amount" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Additional
+            funds:</label>
+        <div class="w-fit flex">
+            <button
+                (click)="changeAmount(-1)"
+                matRipple
+                class="inline-flex items-center px-3 text-sm text-white bg-blue-600 hover:bg-blue-500 rounded-s-md">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
+                  </svg>
+                  
+            </button>
+            <input type="number" id="amount" inputmode="numeric" min="0"
+                [(ngModel)]="amount"
+                class="bg-slate-800 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 text-sm border-gray-300 p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="20">
+            <button
+                (click)="changeAmount(1)"
+                matRipple
+                class="inline-flex items-center px-3 text-sm text-white bg-blue-600 hover:bg-blue-500 rounded-e-md">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                  </svg>
+                  
+            </button>
+        </div>
+    </div>
+    <div class="flex flex-row flex-wrap justify-start gap-2">
+        <button matRipple (click)="changeAmount(5)" class="p-2 w-16 rounded-lg text-white bg-blue-600 hover:bg-blue-500">+5</button>
+        <button matRipple (click)="changeAmount(10)" class="p-2 w-16 rounded-lg text-white bg-blue-600 hover:bg-blue-500">+10</button>
+        <button matRipple (click)="changeAmount(20)" class="p-2 w-16 rounded-lg text-white bg-blue-600 hover:bg-blue-500">+20</button>
+    </div>
+    <div class="mt-auto flex flex-row gap-6 justify-end">
+        <button class="text-white" (click)="onNoClick()">Cancel</button>
+        <button matRipple [ngClass]="{'bg-gray-800 cursor-not-allowed': !amount || amount <= 0, 'bg-emerald-700 hover:bg-emerald-600': amount && amount > 0}" class="bg-emerald-700 hover:bg-emerald-600 rounded-lg text-white p-2 shadow" [disabled]="!amount && amount <= 0" (click)="topUp()">Top Up</button>
+    </div>
+</div>

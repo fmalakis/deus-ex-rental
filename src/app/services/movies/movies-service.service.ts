@@ -9,11 +9,12 @@ export class MoviesServiceService {
 
     private readonly API_URL = '/api/rent-store/movies/';
     private readonly API_URL_RENTALS = '/api/rent-store/rentals/';
+    private readonly API_URL_CATEGORIES = '/api/rent-store/categories/';
 
     constructor(private http: HttpClient) { }
 
-    getMovies(page: number, pageSize: number): Observable<MovieResponse> {
-        return this.http.get<MovieResponse>(`${this.API_URL}?page=${page}&page_size=${pageSize}`);
+    getMovies(page: number, pageSize: number, catogory: string = '', higherThan: string = '', lowerThan: string = '', yearAfter: string = '', yearBefore: string = ''): Observable<MovieResponse> {
+        return this.http.get<MovieResponse>(`${this.API_URL}?page=${page}&page_size=${pageSize}${catogory? `&category=${catogory}` : ''}${higherThan? `&from-rating=${higherThan}` : ''}${higherThan? `&to-rating=${lowerThan}` : ''}${yearAfter? `&from-year=${yearAfter}` : ''}${yearBefore? `&to-year=${yearBefore}` : ''}`);
     }
 
     getMovieById(id: string): Observable<Movie> {
@@ -22,6 +23,10 @@ export class MoviesServiceService {
 
     rentMovie(id: string): Observable<RentalCreationResponse> {
         return this.http.post<RentalCreationResponse>(this.API_URL_RENTALS, {movie: id});
+    }
+
+    getCategories(): Observable<Category[]> {
+        return this.http.get<Category[]>(this.API_URL_CATEGORIES);
     }
 }
 
@@ -45,4 +50,8 @@ export type Movie = {
     description: string,
     poster_url: string,
     categories: string[]
+}
+
+export type Category = {
+    name: string
 }

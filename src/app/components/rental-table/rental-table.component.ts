@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Rental, RentalService } from '../../services/rental/rental.service';
 import { NgClass, formatDate } from '@angular/common';
+import { MatRippleModule } from '@angular/material/core';
 
 type SortableColumns = 'movie' | 'rental_date' | 'return_date';
 
@@ -8,7 +9,7 @@ type SortableColumns = 'movie' | 'rental_date' | 'return_date';
 @Component({
   selector: 'app-rental-table',
   standalone: true,
-  imports: [NgClass],
+  imports: [NgClass, MatRippleModule],
   templateUrl: './rental-table.component.html',
   styleUrl: './rental-table.component.scss'
 })

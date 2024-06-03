@@ -5,7 +5,7 @@
         </div>
         <div class="rounded-lg bg-slate-700 p-4 flex flex-row items-center justify-center gap-4">
             <h2>Balance: <b>{{this.user?.wallet}}</b></h2>
-            <button [disabled]="performingTopUp" class="rounded-lg bg-emerald-600 hover:bg-emerald-700 shadow p-2" (click)="topUpWallet()">Top up + {{performingTopUp? 'Topping up...' : ''}}</button>
+            <button matRipple [disabled]="performingTopUp" class="rounded-lg bg-emerald-600 hover:bg-emerald-700 shadow p-2" (click)="topUpWallet()">{{performingTopUp? 'Topping up...' : 'Top up +'}}</button>
         </div>
         <div class="w-full h-2/5">
             <app-rental-table></app-rental-table>

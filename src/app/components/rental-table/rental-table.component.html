@@ -88,12 +88,12 @@
         </table>
     </div>
     <div class="flex justify-center items-center gap-4 mt-4">
-        <button (click)="changePage(page - 1)"
+        <button (click)="changePage(page - 1)" matRipple
             [ngClass]="{'bg-gray-300 cursor-not-allowed': (page === 1), 'bg-blue-700 hover:bg-blue-600': (page > 1)}"
-            [disabled]="page === 1" class="p-2 rounded-lg shadow">Previous</button>
-        <div>Page {{page}}</div>
-        <button (click)="changePage(page + 1)"
+            [disabled]="page === 1" class="p-2 rounded-lg shadow text-lg">Previous</button>
+        <h5 class="text-lg">Page {{page}}</h5>
+        <button (click)="changePage(page + 1)" matRipple
             [ngClass]="{'bg-gray-300 cursor-not-allowed': (!hasNext), 'bg-blue-700 hover:bg-blue-600': (hasNext)}"
-            [disabled]="!hasNext" class="bg-gray-300 p-2 rounded-lg shadow">Next</button>
+            [disabled]="!hasNext" class="bg-gray-300 p-2 rounded-lg shadow text-lg">Next</button>
     </div>
 </section>

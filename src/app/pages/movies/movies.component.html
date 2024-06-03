@@ -1,4 +1,66 @@
-<section class="p-4 min-h-screen w-full">
+<section class="p-4 min-h-screen w-full flex flex-col gap-4">
+    <div class="bg-slate-700 rounded-lg p-4">
+        <h1 class="text-3xl text-white">
+            Discover the world of premium high-definition movies
+        </h1>
+        <div class="flex flex-row items-center content-start justify-center md:justify-start gap-2 md:gap-4 flex-wrap">
+            <div class="mt-5">
+                <label for="movieType" class="block text-sm font-medium text-white">Select a category</label>
+                <select id="movieType" name="movieType"
+                    class="text-lg md:text-xl cursor-pointer mt-1 block w-full pl-3 pr-10 py-2 text-white border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md bg-slate-500"
+                    (change)="onSelect($event)">
+                    <option value="" disabled [selected]="!filterCategory">Filter by category</option>
+                    @for (category of categories; track $index) {
+                    <option [value]="category.name" [selected]="category.name === filterCategory">{{ category.name }}
+                    </option>
+                    }
+                </select>
+            </div>
+            <div class="mt-5">
+                <label for="low" class="block text-sm font-medium text-white">Higher rating than</label>
+                <div class="flex">
+                    <input (change)="changeInFilters = true" [(ngModel)]="ratingHigherThan" type="number"
+                        inputmode="numeric" min="0" max="10" id="low"
+                        class="rounded-s-md w-full bg-slate-800 border text-gray-900 block text-sm border-gray-300 p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+                    <span
+                        class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-e-md border-gray-300 border-s-0 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                        /10
+                    </span>
+                </div>
+
+            </div>
+            <div class="mt-5">
+                <label for="high" class="block text-sm font-medium text-white">Lower rating than</label>
+                <div class="flex">
+                    <input (change)="changeInFilters = true" type="number" [(ngModel)]="ratingLowerThan"
+                        inputmode="numeric" min="0" max="10" id="high"
+                        class="rounded-s-md w-full bg-slate-800 border text-gray-900 block text-sm border-gray-300 p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+                    <span
+                        class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-e-md border-gray-300 border-s-0 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                        /10
+                    </span>
+                </div>
+            </div>
+            <div class="mt-5">
+                <label for="pub_year_after" class="block text-sm font-medium text-white">Came out after</label>
+                <input (change)="changeInFilters = true" [(ngModel)]="yearAfter" type="number" inputmode="numeric"
+                    min="0" max="10" id="pub_year_after"
+                    class="rounded-md w-full bg-slate-800 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block text-sm border-gray-300 p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            </div>
+            <div class="mt-5">
+                <label for="pub_year_before" class="block text-sm font-medium text-white">Came out before</label>
+                <input (change)="changeInFilters = true" [(ngModel)]="yearBefore" type="number" inputmode="numeric"
+                    min="0" max="10" id="pub_year_before"
+                    class="rounded-md w-full bg-slate-800 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block text-sm border-gray-300 p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            </div>
+        </div>
+        <button matRipple [disabled]="!changeInFilters" (click)="initiateSearch()"
+            [ngClass]="{'bg-gray-500 hover:bg-gray-600 cursor-not-allowed': !changeInFilters, 'bg-blue-500 hover:bg-blue-600': changeInFilters}"
+            class="mt-2 text-white p-2 text-lg rounded-lg w-full md:w-1/5">Start searching</button>
+        <button matRipple (click)="clearFilters()"
+            class="ml-0 md:ml-2 mt-2 text-white p-2 text-lg rounded-lg w-full md:w-1/5 bg-blue-500 hover:bg-blue-600">Clear
+            filters</button>
+    </div>
     <div class="w-full flex items-center content-center justify-center flex-row flex-wrap gap-4 grow">
         @for(movie of movies; track movie.uuid;) {
         <app-movie-card [movie]="movie"></app-movie-card>
