@@ -5,9 +5,12 @@ import { Injectable } from '@angular/core';
 })
 export class StorageService {
 
+  isUsingLocalStorage: boolean = false;
+
   constructor() { }
 
   setLocalStorage(pairs: StorageKeyValuePairs[]): void {
+    this.isUsingLocalStorage = true;
     pairs.forEach((pair) => localStorage.setItem(pair.key, pair.value));
   }
 

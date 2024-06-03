@@ -1,0 +1,99 @@
+<section class="container mx-auto min-h-full">
+    <h4 class="text-3xl font-bold rounded-t-lg bg-slate-700 w-fit p-2">Rentals:</h4>
+    <div
+        class="overflow-x-scroll md:overflow-hidden text-sm md:text-lg bg-slate-700 p-2 rounded-b-lg rounded-tr-lg h-auto md:h-[350px]">
+        <table class="min-w-full bg-slate-700 border border-gray-200 rounded-lg table-fixed h-full">
+            <thead class="bg-slate-900">
+                <tr>
+                    <th class="px-4 py-2 border-b w-2/5">
+                        <button (click)="changeSort('movie')" class="inline-flex items-center gap-2">
+                            Title
+                            @if (sortColumn === 'movie') {
+                                @switch (sortDirection) {
+                                    @case ('asc') {
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                            stroke="currentColor" class="size-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                                        </svg>
+                                    }
+                                    @case ('desc') {
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                            stroke="currentColor" class="size-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                        </svg>
+                                    }
+                                }
+                            }
+                        </button>
+                    </th>
+                    <th class="px-4 py-2 border-b w-1/5"><button (click)="changeSort('rental_date')" class="inline-flex items-center gap-2">Rental Date
+                        @if (sortColumn === 'rental_date') {
+                            @switch (sortDirection) {
+                                @case ('asc') {
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                        stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                                    </svg>
+                                }
+                                @case ('desc') {
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                        stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                    </svg>
+                                }
+                            }
+                            }</button></th>
+                    <th class="px-4 py-2 border-b w-1/5"><button (click)="changeSort('return_date')" class="inline-flex items-center gap-2">Return Date
+                        @if (sortColumn === 'return_date') {
+                            @switch (sortDirection) {
+                                @case ('asc') {
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                        stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                                    </svg>
+                                }
+                                @case ('desc') {
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                        stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                    </svg>
+                                }
+                            }
+
+                            }</button></th>
+                    <th class="px-4 py-2 border-b w-1/5">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (rental of this.rentals; track rental.uuid) {
+                <tr class="hover:bg-slate-800">
+                    <td class="px-4 py-2 border-b text-center">
+                        {{rental.movie}}
+                    </td>
+                    <td class="px-4 py-2 border-b text-center">{{rental.rental_date}}</td>
+                    <td class="px-4 py-2 border-b text-center">{{rental.return_date ? rental.return_date : 'Active'}}
+                    </td>
+                    <td class="px-4 py-2 border-b text-center">
+                        <div class="flex items-center justify-center">
+                            @if (!rental.return_date) {
+                            <button (click)="returnMovie(rental)" class="bg-blue-500 text-white px-2 py-1 rounded">
+                                Return
+                            </button>
+                            }
+                        </div>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="flex justify-center items-center gap-4 mt-4">
+        <button (click)="changePage(page - 1)"
+            [ngClass]="{'bg-gray-300 cursor-not-allowed': (page === 1), 'bg-blue-700 hover:bg-blue-600': (page > 1)}"
+            [disabled]="page === 1" class="p-2 rounded-lg shadow">Previous</button>
+        <div>Page {{page}}</div>
+        <button (click)="changePage(page + 1)"
+            [ngClass]="{'bg-gray-300 cursor-not-allowed': (!hasNext), 'bg-blue-700 hover:bg-blue-600': (hasNext)}"
+            [disabled]="!hasNext" class="bg-gray-300 p-2 rounded-lg shadow">Next</button>
+    </div>
+</section>

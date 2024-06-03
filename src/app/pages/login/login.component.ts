@@ -47,7 +47,9 @@ export class LoginComponent {
                         key: 'username',
                         value: this.username
                     }
-                ]
+                ];
+
+                console.log(kvps)
 
                 console.log(this.willRemember)
 

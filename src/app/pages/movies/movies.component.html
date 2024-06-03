@@ -1,5 +1,5 @@
 <section class="p-4 min-h-screen w-full">
-    <div class="w-full flex flex-row flex-wrap gap-4 container">
+    <div class="w-full flex items-center content-center justify-center flex-row flex-wrap gap-4 grow">
         @for(movie of movies; track movie.uuid;) {
         <app-movie-card [movie]="movie"></app-movie-card>
         }

@@ -3,6 +3,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { MoviesComponent } from './pages/movies/movies.component';
 import { authGuard } from './guards/auth.guard';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 export const routes: Routes = [
     {
@@ -16,5 +17,8 @@ export const routes: Routes = [
     },
     {
         path: 'movies/:id', component: MovieDetailsComponent, canActivate: [authGuard]
+    },
+    {
+        path: 'profile', component: ProfileComponent, pathMatch: 'full' , canActivate: [authGuard]
     }
 ];
