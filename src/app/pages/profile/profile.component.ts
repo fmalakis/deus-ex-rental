@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { StorageService } from '../../services/storage.service';
+import { StorageService } from '../../services/storage/storage.service';
 import { User, UserService } from '../../services/user/user.service';
 import { RentalTableComponent } from '../../components/rental-table/rental-table.component';
 import { Rental, RentalService } from '../../services/rental/rental.service';

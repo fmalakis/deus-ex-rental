@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthResponse, AuthService } from '../../services/auth/auth.service';
 import { NavbarService } from '../../services/navbar/navbar.service';
-import { StorageKeyValuePairs, StorageService } from '../../services/storage.service';
+import { StorageKeyValuePairs, StorageService } from '../../services/storage/storage.service';
 
 @Component({
   selector: 'app-login',
@@ -58,6 +58,9 @@ export class LoginComponent {
                 } else {
                     this.storage.setSessionStorage(kvps);
                 }
+
+                const username = localStorage.getItem('username') ?? sessionStorage.getItem('username');
+                this.navbarService.setIsAdmin(username ? username.includes('admin') : false);
 
                 this.router.navigate(['/movies']);
             },

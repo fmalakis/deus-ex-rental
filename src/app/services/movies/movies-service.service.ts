@@ -17,6 +17,11 @@ export class MoviesServiceService {
         return this.http.get<MovieResponse>(`${this.API_URL}?page=${page}&page_size=${pageSize}${catogory? `&category=${catogory}` : ''}${higherThan? `&from-rating=${higherThan}` : ''}${higherThan? `&to-rating=${lowerThan}` : ''}${yearAfter? `&from-year=${yearAfter}` : ''}${yearBefore? `&to-year=${yearBefore}` : ''}`);
     }
 
+    getAllMovies(): Observable<MovieResponse> {
+        const max = Number.MAX_SAFE_INTEGER;
+        return this.http.get<MovieResponse>(`${this.API_URL}?page_size=${max}`);
+    }
+
     getMovieById(id: string): Observable<Movie> {
         return this.http.get<Movie>(`${this.API_URL}/${id}`);
     }

@@ -3,12 +3,12 @@
         <div class="rounded-lg bg-slate-700 p-4">
             <h1>Welcome back, <b>{{this.user?.first_name}} {{this.user?.last_name}}</b></h1>
         </div>
-        <div class="rounded-lg bg-slate-700 p-4 flex flex-row items-center justify-center gap-4">
+        <div class="w-full md:w-fit rounded-lg bg-slate-700 p-4 flex flex-row items-center justify-center gap-4">
             <h2>Balance: <b>{{this.user?.wallet}}</b></h2>
             <button matRipple [disabled]="performingTopUp" class="rounded-lg bg-emerald-600 hover:bg-emerald-700 shadow p-2" (click)="topUpWallet()">{{performingTopUp? 'Topping up...' : 'Top up +'}}</button>
         </div>
         <div class="w-full h-2/5">
-            <app-rental-table></app-rental-table>
+            <app-rental-table tableHeader="Your Rentals:"></app-rental-table>
         </div>
     </div>
 </section>

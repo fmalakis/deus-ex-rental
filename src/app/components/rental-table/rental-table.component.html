@@ -1,11 +1,11 @@
-<section class="container mx-auto min-h-full">
-    <h4 class="text-3xl font-bold rounded-t-lg bg-slate-700 w-fit p-2">Rentals:</h4>
+<section class="w-full h-full">
+    <h4 class="text-2xl font-bold rounded-t-lg bg-slate-700 w-fit p-2">{{tableHeader ? tableHeader : 'Rentals:'}}</h4>
     <div
-        class="overflow-x-scroll md:overflow-hidden text-sm md:text-lg bg-slate-700 p-2 rounded-b-lg rounded-tr-lg h-auto md:h-[350px]">
-        <table class="min-w-full bg-slate-700 border border-gray-200 rounded-lg table-fixed h-full">
+        class="overflow-x-scroll md:overflow-hidden text-sm md:text-md md:text-lg bg-slate-700 p-2 rounded-b-lg rounded-tr-lg h-[500px] md:h-[350px] w-full">
+        <table class="w-full min-w-full bg-slate-700 border border-gray-200 rounded-lg table-fixed h-full">
             <thead class="bg-slate-900">
                 <tr>
-                    <th class="px-4 py-2 border-b w-2/5">
+                    <th class="px-2 md:px-4 py-2 border-b w-[126px] sm:md:w-2/5">
                         <button (click)="changeSort('movie')" class="inline-flex items-center gap-2">
                             Title
                             @if (sortColumn === 'movie') {
@@ -26,7 +26,7 @@
                             }
                         </button>
                     </th>
-                    <th class="px-4 py-2 border-b w-1/5"><button (click)="changeSort('rental_date')" class="inline-flex items-center gap-2">Rental Date
+                    <th class="px-2 md:px-4 py-2 border-b w-[126px] sm:md:w-1/5"><button (click)="changeSort('rental_date')" class="inline-flex items-center gap-2">Rental Date
                         @if (sortColumn === 'rental_date') {
                             @switch (sortDirection) {
                                 @case ('asc') {
@@ -43,7 +43,10 @@
                                 }
                             }
                             }</button></th>
-                    <th class="px-4 py-2 border-b w-1/5"><button (click)="changeSort('return_date')" class="inline-flex items-center gap-2">Return Date
+                    @if (isAdminTable) {
+                        <td class="px-2 md:px-4 py-2 border-b text-center w-[126px] sm:md:w-1/5 font-bold">User</td>
+                    }
+                    <th class="px-2 md:px-4 py-2 border-b w-[126px] sm:md:w-1/5"><button (click)="changeSort('return_date')" class="inline-flex items-center gap-2">Return Date
                         @if (sortColumn === 'return_date') {
                             @switch (sortDirection) {
                                 @case ('asc') {
@@ -61,7 +64,7 @@
                             }
 
                             }</button></th>
-                    <th class="px-4 py-2 border-b w-1/5">Action</th>
+                    <th class="px-4 py-2 border-b w-[126px] sm:md:w-1/5">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -71,6 +74,9 @@
                         {{rental.movie}}
                     </td>
                     <td class="px-4 py-2 border-b text-center">{{rental.rental_date}}</td>
+                    @if (isAdminTable) {
+                        <td class="px-4 py-2 border-b text-center text-ellipsis overflow-hidden">{{rental.user}}</td>
+                    }
                     <td class="px-4 py-2 border-b text-center">{{rental.return_date ? rental.return_date : 'Active'}}
                     </td>
                     <td class="px-4 py-2 border-b text-center">
@@ -91,7 +97,7 @@
         <button (click)="changePage(page - 1)" matRipple
             [ngClass]="{'bg-gray-300 cursor-not-allowed': (page === 1), 'bg-blue-700 hover:bg-blue-600': (page > 1)}"
             [disabled]="page === 1" class="p-2 rounded-lg shadow text-lg">Previous</button>
-        <h5 class="text-lg">Page {{page}}</h5>
+        <h5 class="text-lg">Page {{page}} / {{totalCount}}</h5>
         <button (click)="changePage(page + 1)" matRipple
             [ngClass]="{'bg-gray-300 cursor-not-allowed': (!hasNext), 'bg-blue-700 hover:bg-blue-600': (hasNext)}"
             [disabled]="!hasNext" class="bg-gray-300 p-2 rounded-lg shadow text-lg">Next</button>
