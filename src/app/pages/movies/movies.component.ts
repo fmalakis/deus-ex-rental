@@ -72,6 +72,7 @@ export class MoviesComponent {
         console.log(`Loading movies ${this.currentPage}...`);
         this.movieService.getMovies(this.currentPage, this.perPage, this.filterCategory, this.ratingHigherThan, this.ratingLowerThan, this.yearAfter, this.yearBefore).subscribe(
             (data: MovieResponse) => {
+                console.log(data)
                 this.movies.push(...new Set(data.results));
                 console.log(this.movies);
                 this.currentPage++;

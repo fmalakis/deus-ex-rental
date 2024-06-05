@@ -31,7 +31,7 @@ import {
       let options = {
         root: null,
         rootMargin: '0px',
-        threshold: 0.5,
+        threshold: 0.8,
       };
       this.observer = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting) {
