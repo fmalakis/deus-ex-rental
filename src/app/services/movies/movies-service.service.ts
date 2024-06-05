@@ -33,6 +33,10 @@ export class MoviesServiceService {
     getCategories(): Observable<Category[]> {
         return this.http.get<Category[]>(this.API_URL_CATEGORIES);
     }
+
+    createNewMovie(newMovie: {title: string, categories: string[], pub_date?: number, duration?: number, rating?: number, description?: string}): Observable<any> {
+        return this.http.post<any>(this.API_URL, newMovie);
+    }
 }
 
 export type MovieResponse = {

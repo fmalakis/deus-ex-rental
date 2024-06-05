@@ -6,11 +6,12 @@ import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatRippleModule } from '@angular/material/core';
 import { NgClass } from '@angular/common';
+import { SkeletonCardComponent } from '../../components/skeleton-card/skeleton-card.component';
 
 @Component({
   selector: 'app-movies',
   standalone: true,
-  imports: [MovieCardComponent, IntersectionListenerDirective, FormsModule, MatRippleModule, NgClass],
+  imports: [MovieCardComponent, IntersectionListenerDirective, FormsModule, MatRippleModule, NgClass, SkeletonCardComponent],
   templateUrl: './movies.component.html',
   styleUrl: './movies.component.scss'
 })
@@ -87,7 +88,6 @@ export class MoviesComponent {
         this.filterCategory = (event.target as HTMLSelectElement).value;
         this.changeInFilters = true;
         console.log(`Selected movie type: ${this.filterCategory}`);
-        // this.loadMovies(true);
     }
 
     initiateSearch() {
@@ -100,6 +100,7 @@ export class MoviesComponent {
         this.yearBefore = '';
         this.ratingHigherThan = '';
         this.ratingLowerThan = '';
+        this.noMoreMovies = false;
         this.loadMovies(true);
     }
 }

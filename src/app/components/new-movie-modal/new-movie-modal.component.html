@@ -1,0 +1,96 @@
+<div class="bg-slate-700 h-full p-4 flex flex-col gap-2">
+    <h1 class="text-white font-bold text-2xl md:text-3xl">Add a new movie</h1>
+    <h2 class="text-white text-lg md:text-base">Add a new movie to your rental shop's collection with a few easy clicks.
+    </h2>
+    <em class="text-sm text-white"><span class="font-semibold text-red-400">*</span> = Required fields for the creation
+        of a new movie.</em>
+    @if (newMovieForm) {
+    <div mat-dialog-content>
+        <form [formGroup]="newMovieForm">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="movieTitle" class="block text-base font-medium text-white">Title:<span
+                            class="font-semibold text-red-400"> *</span></label>
+                    <input
+                        class="rounded-md w-full bg-slate-800 border text-gray-900 block text-sm border-gray-300 p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                        type="text" id="movieTitle" formControlName="title" minlength="1" maxlength="200">
+                    @if (newMovieForm.controls['title'].invalid && (newMovieForm.controls['title'].dirty ||
+                    newMovieForm.controls['title'].touched)) {
+                    <strong class="text-red-300">Title is required.</strong>
+                    }
+                </div>
+                <div>
+                    <label class="block text-base font-medium text-white" for="duration">Duration:<span
+                            class="font-semibold text-red-400"> *</span></label>
+                    <input type="number" inputmode="numeric" min="0" max="32767" step="1" id="duration"
+                        formControlName="duration"
+                        class="rounded-md w-full bg-slate-800 border text-gray-900 block text-sm border-gray-300 p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+                    @if (newMovieForm.controls['duration'].invalid && (newMovieForm.controls['duration'].dirty ||
+                    newMovieForm.controls['duration'].touched)) {
+                    <strong class="text-red-300">Duration needs to be a positive integer between 0 and
+                        32767.</strong>
+                    }
+                </div>
+                <div>
+                    <label class="block text-base font-medium text-white" for="publicationDate">Year of release:<span
+                            class="font-semibold text-red-400"> *</span></label>
+                    <input type="number" inputmode="numeric" id="publicationDate" formControlName="publicationDate"
+                        class="rounded-md w-full bg-slate-800 border text-gray-900 block text-sm border-gray-300 p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+                    @if (newMovieForm.controls['publicationDate'].invalid &&
+                    (newMovieForm.controls['publicationDate'].dirty ||
+                    newMovieForm.controls['publicationDate'].touched)) {
+                    <strong class="text-red-300">Release date needs to be a positive integer between 0 and
+                        32767.</strong>
+                    }
+                </div>
+                <div>
+                    <label class="block text-base font-medium text-white" for="rating">Rating (out of 10):<span
+                            class="font-semibold text-red-400"> *</span></label>
+                    <input type="number" inputmode="numeric" id="rating" min="0" max="10" formControlName="rating"
+                        class="rounded-md w-full bg-slate-800 border text-gray-900 block text-sm border-gray-300 p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+                    @if (newMovieForm.controls['rating'].invalid &&
+                    (newMovieForm.controls['rating'].dirty ||
+                    newMovieForm.controls['rating'].touched)) {
+                    <strong class="text-red-300">Rating needs to be a number between 0 and 10.</strong>
+                    }
+                </div>
+                <div class="col-span-1 md:col-span-2">
+                    <div>
+                        <label class="block text-base font-medium text-white" for="description">Description:</label>
+                        <textarea id="description" formControlName="description"
+                            class="rounded-md w-full bg-slate-800 border text-gray-900 block text-sm border-gray-300 p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white h-[250px] resize-none"></textarea>
+                    </div>
+                </div>
+                <div class="col-span-1 md:col-span-2">
+                    <label class="block text-base font-medium text-white">Categories:<span
+                            class="font-semibold text-red-400"> *</span></label>
+                    <div class="mt-2 flex flex-row flex-wrap gap-4" formGroupName="categories">
+                        @for (category of data.categories; track $index) {
+                        <div class="inline-flex items-center justify-center gap-1 rounded-full bg-blue-500 p-2">
+                            <input class="w-4 h-4 accent-emerald-700" type="checkbox" [id]="category"
+                                [formControlName]="category">
+                            <label [for]="category" class="text-white">{{category}}</label>
+                        </div>
+                        }
+                    </div>
+                    @if (newMovieForm.controls['categories'].invalid && (newMovieForm.controls['categories'].dirty ||
+                    newMovieForm.controls['categories'].touched)) {
+                    <div class="mt-4">
+                        <strong class="text-red-300">
+                            At least one category must be selected.
+                        </strong>
+                    </div>
+
+                    }
+                </div>
+            </div>
+        </form>
+    </div>
+    }
+    <div class="mt-auto flex flex-row gap-6 justify-end">
+        <button class="text-white" (click)="closeMovieModal()">Cancel</button>
+        <button (click)="submitNewMovie()" [disabled]="!newMovieForm?.valid" matRipple
+            [ngClass]="{'bg-emerald-700 hover:bg-emerald-600': newMovieForm?.valid, 'bg-gray-500 hover:bg-gray-600 cursor-not-allowed': !newMovieForm?.valid}"
+            class="bg-emerald-700 hover:bg-emerald-600 rounded-lg text-white p-2 shadow">Create</button>
+    </div>
+</div>

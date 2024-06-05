@@ -4,3 +4,11 @@
 @tailwind utilities;
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+#navbar-default {
+    z-index: 1000 !important; /* Ensure this is higher than any z-index applied by matRipple */
+  }
+  
+  #navbar-default .mat-ripple-element {
+    z-index: auto !important; /* Ensure the ripple effect doesn't interfere */
+  }

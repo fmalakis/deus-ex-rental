@@ -65,6 +65,16 @@
         @for(movie of movies; track movie.uuid;) {
         <app-movie-card [movie]="movie"></app-movie-card>
         }
+        @if (initiatedLoading) {
+            <app-skeleton-card></app-skeleton-card>
+            <app-skeleton-card></app-skeleton-card>
+            <app-skeleton-card></app-skeleton-card>
+            <app-skeleton-card></app-skeleton-card>
+            <app-skeleton-card></app-skeleton-card>
+            <app-skeleton-card></app-skeleton-card>
+            <app-skeleton-card></app-skeleton-card>
+            <app-skeleton-card></app-skeleton-card>
+        }
     </div>
     <div (appIntersectionListener)="loadMovies()">More</div>
 </section>
