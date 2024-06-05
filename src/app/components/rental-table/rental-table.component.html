@@ -1,9 +1,9 @@
 <section class="w-full h-full">
-    <h4 class="text-2xl font-bold rounded-t-lg bg-slate-700 w-fit p-2">{{tableHeader ? tableHeader : 'Rentals:'}}</h4>
+    <h4 class="text-2xl font-bold rounded-t-lg bg-slate-300 dark:bg-slate-700 w-fit p-2">{{tableHeader ? tableHeader : 'Rentals:'}}</h4>
     <div
-        class="overflow-x-scroll md:overflow-hidden text-sm md:text-md md:text-lg bg-slate-700 p-2 rounded-b-lg rounded-tr-lg h-[500px] md:h-[350px] w-full">
-        <table class="w-full min-w-full bg-slate-700 border border-gray-200 rounded-lg table-fixed h-full">
-            <thead class="bg-slate-900">
+        class="overflow-x-scroll md:overflow-hidden text-sm md:text-md md:text-lg bg-slate-300 dark:bg-slate-700 p-2 rounded-b-lg rounded-tr-lg h-[500px] md:h-[350px] w-full">
+        <table class="w-full min-w-full bg-slate-300 dark:bg-slate-700 border border-gray-200 rounded-lg table-fixed h-full">
+            <thead class="bg-slate-400 dark:bg-slate-900">
                 <tr>
                     <th class="px-2 md:px-4 py-2 border-b w-[126px] sm:md:w-2/5">
                         <button (click)="changeSort('movie')" class="inline-flex items-center gap-2">
@@ -69,7 +69,7 @@
             </thead>
             <tbody>
                 @for (rental of this.rentals; track rental.uuid) {
-                <tr class="hover:bg-slate-800">
+                <tr class="hover:bg-slate-200 dark:hover:bg-slate-800">
                     <td class="px-4 py-2 border-b text-center">
                         {{rental.movie}}
                     </td>

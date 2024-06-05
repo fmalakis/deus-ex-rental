@@ -1,4 +1,4 @@
-<nav *ngIf="showNavbar" class="bg-white border-gray-200 dark:bg-gray-900 sticky top-0 w-full z-50">
+<nav *ngIf="showNavbar" class="bg-slate-300 border-gray-200 dark:bg-gray-900 sticky top-0 w-full z-50">
     <div class="w-full flex flex-wrap items-center content-center p-4">
         <a routerLink="/movies" class="flex items-center justify-center space-x-3 rtl:space-x-reverse cursor-pointer">
             <span class="text-lg md:text-2xl font-semibold whitespace-nowrap dark:text-white">Deus-Ex Rental</span>
@@ -9,19 +9,19 @@
           </button>
         <div [ngClass]="{'block': menuIsShowing, 'hidden': !menuIsShowing, 'absolute top-full left-0 right-0 z-50': menuIsShowing, 'md:block md:w-auto ml-auto': true}" class="hidden w-full md:block md:w-auto ml-auto z-50" id="navbar-default">
             <ul
-                class="font-medium flex flex-col items-start md:items-center p-4 md:p-0 rounded-b-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 bg-gray-900">
+                class="font-medium flex flex-col items-start md:items-center p-4 md:p-0 rounded-b-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 bg-slate-300 dark:bg-gray-900">
                 <li>
                     <a (click)="closeMenu()" routerLink="/profile"
-                        class="cursor-pointer text-xl md:text-2xl md:text-2xl block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Profile</a>
+                        class="cursor-pointer text-xl md:text-2xl md:text-2xl block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 hover:text-blue-700 md:p-0 dark:text-white dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Profile</a>
                 </li>
                 @if (isAdmin) {
                     <li>
                         <a (click)="closeMenu()" routerLink="/admin"
-                            class="cursor-pointer text-xl md:text-2xl block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Admin Dashboard</a>
+                            class="cursor-pointer text-xl md:text-2xl block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Admin Dashboard</a>
                     </li> 
                 }
                 <li>
-                    <button class="text-white hover:text-blue-700 py-2 px-3" (click)="performLogout()" type="button">
+                    <button class="text-black dark:text-white dark:hover:text-blue-700 hover:text-blue-700 py-2 px-3" (click)="performLogout()" type="button">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
