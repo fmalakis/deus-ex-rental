@@ -5,11 +5,12 @@ import { Router } from '@angular/router';
 import { AuthResponse, AuthService } from '../../services/auth/auth.service';
 import { NavbarService } from '../../services/navbar/navbar.service';
 import { StorageKeyValuePairs, StorageService } from '../../services/storage/storage.service';
+import { ImageMarqueeComponent } from '../../components/image-marquee/image-marquee.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, ImageMarqueeComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
