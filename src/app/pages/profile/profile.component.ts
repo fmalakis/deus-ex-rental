@@ -6,6 +6,7 @@ import { Rental, RentalService } from '../../services/rental/rental.service';
 import { MatRippleModule } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TopUpModalComponent } from '../../components/top-up-modal/top-up-modal.component';
+import { SnackbarService, SnackbarType } from '../../services/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-profile',
@@ -19,7 +20,7 @@ export class ProfileComponent {
     user: User | undefined;
     performingTopUp: boolean = false;
 
-    constructor(private userService: UserService, public dialog: MatDialog) {}
+    constructor(private userService: UserService, public dialog: MatDialog, private snackbarService: SnackbarService) {}
 
     ngOnInit() {
         this.userService.getUserProfile().subscribe(
@@ -43,9 +44,10 @@ export class ProfileComponent {
                         walletResponse => {
                             if (this.user) this.user.wallet += walletResponse.deposit;
 
+                            this.snackbarService.showSnackbar(SnackbarType.TOP_UP, `${walletResponse.deposit}€ have been succesfully added to your wallet`)
                             this.performingTopUp = false;
                         },
-                        error => console.log('Error during popup', error)
+                        error => this.snackbarService.showSnackbar(SnackbarType.LOGIN_ERROR, 'Oops, could not complete the top up')
                     )
                 }
             }

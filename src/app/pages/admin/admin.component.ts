@@ -5,6 +5,7 @@ import { MatRipple } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NewMovieModalComponent } from '../../components/new-movie-modal/new-movie-modal.component';
 import { MoviesServiceService } from '../../services/movies/movies-service.service';
+import { SnackbarService, SnackbarType } from '../../services/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-admin',
@@ -18,7 +19,7 @@ export class AdminComponent {
     movieCategories: string[] = [];
     categoriesAvailable: boolean = false;
 
-    constructor(private dialog: MatDialog, private movieService: MoviesServiceService) {}
+    constructor(private dialog: MatDialog, private movieService: MoviesServiceService, private snackbarService: SnackbarService) {}
 
     ngOnInit() {
         this.movieService.getCategories().subscribe(
@@ -54,8 +55,9 @@ export class AdminComponent {
         this.movieService.createNewMovie(newMovie).subscribe(
             result => {
                 console.log('Created new movie', result);
+                this.snackbarService.showSnackbar(SnackbarType.RENT, `"${newMovie.title}" was succesfully added to the database.`);
             },
-            error => console.log('Error creating a new movie', error)
+            error => this.snackbarService.showSnackbar(SnackbarType.LOGIN_ERROR, 'Could not add new movie. Please try again later.')
         )
     }
 
