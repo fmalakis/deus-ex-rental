@@ -1,6 +1,6 @@
-<div class="bg-slate-700 h-full p-4 flex flex-col gap-2">
-    <h1 class="text-white font-bold text-2xl md:text-3xl">Top-up your wallet</h1>
-    <h2 class="text-white text-sm md:text-lg">Not enough money to rent your favorite film? No worries, add more funds to your
+<div class="bg-gray-300 dark:bg-slate-700 h-full p-4 flex flex-col gap-2">
+    <h1 class="dark:text-white font-bold text-2xl md:text-3xl">Top-up your wallet</h1>
+    <h2 class="dark:text-white text-sm md:text-lg">Not enough money to rent your favorite film? No worries, add more funds to your
         account in one click:</h2>
     <div>
         <label for="amount" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Additional
@@ -17,8 +17,8 @@
             </button>
             <input type="number" id="amount" inputmode="numeric" min="0"
                 [(ngModel)]="amount"
-                class="bg-slate-800 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 text-sm border-gray-300 p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="20">
+                class="dark:bg-slate-800 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 text-sm border-gray-300 p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="20€">
             <button
                 (click)="changeAmount(1)"
                 matRipple
@@ -31,12 +31,12 @@
         </div>
     </div>
     <div class="flex flex-row flex-wrap justify-start gap-2">
-        <button matRipple (click)="changeAmount(5)" class="p-2 w-16 rounded-lg text-white bg-blue-600 hover:bg-blue-500">+5</button>
-        <button matRipple (click)="changeAmount(10)" class="p-2 w-16 rounded-lg text-white bg-blue-600 hover:bg-blue-500">+10</button>
-        <button matRipple (click)="changeAmount(20)" class="p-2 w-16 rounded-lg text-white bg-blue-600 hover:bg-blue-500">+20</button>
+        <button matRipple (click)="changeAmount(5)" class="p-2 w-16 rounded-lg text-white bg-blue-600 hover:bg-blue-500">+5€</button>
+        <button matRipple (click)="changeAmount(10)" class="p-2 w-16 rounded-lg text-white bg-blue-600 hover:bg-blue-500">+10€</button>
+        <button matRipple (click)="changeAmount(20)" class="p-2 w-16 rounded-lg text-white bg-blue-600 hover:bg-blue-500">+20€</button>
     </div>
     <div class="mt-auto flex flex-row gap-6 justify-end">
-        <button class="text-white" (click)="onNoClick()">Cancel</button>
-        <button matRipple [ngClass]="{'bg-gray-800 cursor-not-allowed': !amount || amount <= 0, 'bg-emerald-700 hover:bg-emerald-600': amount && amount > 0}" class="bg-emerald-700 hover:bg-emerald-600 rounded-lg text-white p-2 shadow" [disabled]="!amount && amount <= 0" (click)="topUp()">Top Up</button>
+        <button class="dark:text-white" (click)="onNoClick()">Cancel</button>
+        <button matRipple [ngClass]="{'bg-gray-800 text-gray-300 cursor-not-allowed': !amount || amount <= 0, 'bg-emerald-400 hover:bg-emerald-300 dark:bg-emerald-600 dark:hover:bg-emerald-700': amount && amount > 0}" class="rounded-lg dark:text-white p-2 shadow" [disabled]="!amount && amount <= 0" (click)="topUp()">Top Up</button>
     </div>
 </div>

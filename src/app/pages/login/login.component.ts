@@ -23,6 +23,12 @@ export class LoginComponent {
     willRemember: boolean = false;
     isLoggingIn: boolean = false;
 
+    words = ['DVDs', 'Blue-Rays', 'Blockbuster releases', 'Cult classics'];
+    currentWordIndex = 0;
+    currentWord = '';
+    isErasing = false;
+    animationClass = 'animate-typewriter';
+
     constructor(
         private http: HttpClient, 
         private router: Router, 
@@ -34,6 +40,7 @@ export class LoginComponent {
 
     ngOnInit() {
         this.navbarService.toggleNavbarVisibility(false);
+        this.setCurrentWord();
     }
 
     onLogin() {
@@ -84,6 +91,23 @@ export class LoginComponent {
                 this.isLoggingIn = false;
             }
         )
+    }
+
+    setCurrentWord(): void {
+
+        this.isErasing = false;
+        this.animationClass = 'animate-typewriter';
+
+        this.currentWord = this.words[this.currentWordIndex];
+        this.currentWordIndex = (this.currentWordIndex + 1) % this.words.length;
+
+        setTimeout(() => {
+            this.isErasing = true;
+            this.animationClass = 'animate-erase';
+            setTimeout(() => {
+              this.setCurrentWord();
+            }, 3000); // Duration of erase animation
+          }, 5000); // Duration to show the word before erasing
     }
 
 }

@@ -4,7 +4,13 @@
         <app-image-marquee></app-image-marquee>
     </div>
     <div class="flex flex-col justify-center items-center p-6 space-y-4 z-10 rounded-lg bg-slate-200 dark:bg-slate-800">
-        <h1 class="text-lg md:text-3xl dark:text-white font-bold">Welcome to the Deus-Ex Rental Shop</h1>
+        <h1 class="text-xl md:text-3xl dark:text-white font-bold">Welcome to the Deus-Ex Rental Shop</h1>
+        <div class="flex items-center content-center justify-center dark:text-white">
+            <div class=" text-lg md:text-2xl font-mono typewriter" [ngClass]="this.animationClass">
+                <span>{{ currentWord }}</span>
+                <span class="border-l-4 border-black animate-blink"></span>
+            </div>
+        </div>
         <div
             class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -47,8 +53,7 @@
                         class="w-full text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">{{
                         username.includes('admin') ? 'Log in as admin 😎' : 'Log in'}}</button>
                     } @else {
-                    <button role="status"
-                        disabled
+                    <button role="status" disabled
                         class="w-full inline-flex items-end content-center justify-center gap-y-2 cursor-not-allowed text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Logging
                         in...<div>
                             <svg aria-hidden="true"

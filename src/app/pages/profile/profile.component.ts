@@ -44,7 +44,7 @@ export class ProfileComponent {
                         walletResponse => {
                             if (this.user) this.user.wallet += walletResponse.deposit;
 
-                            this.snackbarService.showSnackbar(SnackbarType.TOP_UP, `${walletResponse.deposit}€ have been succesfully added to your wallet`)
+                            this.snackbarService.showSnackbar(SnackbarType.TOP_UP, `${walletResponse.deposit}€ ${walletResponse.deposit > 1 ? 'have' : 'has'} been succesfully added to your wallet`)
                             this.performingTopUp = false;
                         },
                         error => this.snackbarService.showSnackbar(SnackbarType.LOGIN_ERROR, 'Oops, could not complete the top up')
