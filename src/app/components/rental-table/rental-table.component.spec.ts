@@ -5,6 +5,7 @@ import { RentalTableComponent } from './rental-table.component';
 import { RentalService } from '../../services/rental/rental.service';
 import { Rental, UserRentalResponse } from '../../services/rental/rental.service';
 import { formatDate } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 describe('RentalTableComponent', () => {
   let component: RentalTableComponent;
@@ -33,7 +34,13 @@ describe('RentalTableComponent', () => {
       ],
       providers: [
         { provide: RentalService, useValue: rentalServiceMock },
-      ],
+        {
+            provide: ActivatedRoute,
+            useValue: {
+              url: of([ { path: '' } ])  // Properly mocking the url observable to return an array
+            }
+          }
+    ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(RentalTableComponent);

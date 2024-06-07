@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TopUpModalComponent } from './top-up-modal.component';
+import { MatDialogRef } from '@angular/material/dialog';
 
 describe('TopUpModalComponent', () => {
   let component: TopUpModalComponent;
@@ -8,7 +9,8 @@ describe('TopUpModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TopUpModalComponent]
+      imports: [TopUpModalComponent],
+      providers: [{provide: MatDialogRef, useValue: {}}]
     })
     .compileComponents();
     

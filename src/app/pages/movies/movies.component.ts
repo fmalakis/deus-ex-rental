@@ -46,6 +46,7 @@ export class MoviesComponent {
     }
 
     loadCategories(): void {
+        
         this.movieService.getCategories().subscribe(
             categoryResponse => {
                 this.categories = categoryResponse;
