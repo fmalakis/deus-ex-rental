@@ -3,6 +3,7 @@ import { Rental, RentalService } from '../../services/rental/rental.service';
 import { NgClass, formatDate } from '@angular/common';
 import { MatRippleModule } from '@angular/material/core';
 import { ActivatedRoute } from '@angular/router';
+import { SnackbarService, SnackbarType } from '../../services/snackbar/snackbar.service';
 
 type SortableColumns = 'movie' | 'rental_date' | 'return_date';
 
@@ -29,7 +30,7 @@ export class RentalTableComponent {
     isAdminTable: boolean = false;
 
 
-    constructor(private rentalService: RentalService, private route: ActivatedRoute) {}
+    constructor(private rentalService: RentalService, private route: ActivatedRoute, private snackbarService: SnackbarService) {}
 
     ngOnInit() {
         this.setIsAdminTable();
@@ -92,11 +93,15 @@ export class RentalTableComponent {
             rentalReturnResponse => {
                 rental.is_paid = true;
                 rental.return_date = formatDate(new Date(), "yyyy-MM-dd", "en-US");
-
+                this.snackbarService.showSnackbar(SnackbarType.RENT, `You have returned "${rental.movie}".`);
                 this.sortMovies()
+
                 console.log(rentalReturnResponse);
             },
-            error => console.log(error)
+            error => {
+                console.log(error)
+                this.snackbarService.showSnackbar(SnackbarType.LOGIN_ERROR, error);
+            }
         )
       }
 

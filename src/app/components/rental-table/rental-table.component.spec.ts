@@ -6,11 +6,13 @@ import { RentalService } from '../../services/rental/rental.service';
 import { Rental, UserRentalResponse } from '../../services/rental/rental.service';
 import { formatDate } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { SnackbarService, SnackbarType } from '../../services/snackbar/snackbar.service';
 
 describe('RentalTableComponent', () => {
   let component: RentalTableComponent;
   let fixture: ComponentFixture<RentalTableComponent>;
   let rentalServiceMock: jasmine.SpyObj<RentalService>;
+  let snackbarServiceMock: jasmine.SpyObj<SnackbarService>;
 
   const mockRentals: Rental[] = [
     { uuid: '1', movie: 'Movie A', rental_date: '2023-01-01', return_date: '2023-01-10', is_paid: false, charge: 10, user: 'User1' },
@@ -26,6 +28,7 @@ describe('RentalTableComponent', () => {
 
   beforeEach(async () => {
     rentalServiceMock = jasmine.createSpyObj('RentalService', ['getUserRentals', 'returnRental']);
+    snackbarServiceMock = jasmine.createSpyObj('SnackbarService', ['showSnackbar'])
 
     await TestBed.configureTestingModule({
       imports: [
@@ -33,13 +36,14 @@ describe('RentalTableComponent', () => {
         RentalTableComponent,  // Importing the standalone component
       ],
       providers: [
+        { provide: SnackbarService, useValue: snackbarServiceMock },
         { provide: RentalService, useValue: rentalServiceMock },
         {
             provide: ActivatedRoute,
             useValue: {
               url: of([ { path: '' } ])  // Properly mocking the url observable to return an array
             }
-          }
+        }
     ],
     }).compileComponents();
 

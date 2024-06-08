@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Category, Movie, MovieResponse, MoviesServiceService } from '../../services/movies/movies-service.service';
 import { MovieCardComponent } from '../../components/movie-card/movie-card.component';
-import { IntersectionListenerDirective } from '../../intersection-listener.directive';
+import { IntersectionListenerDirective } from '../../directives/intersection-listener.directive';
 import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatRippleModule } from '@angular/material/core';
