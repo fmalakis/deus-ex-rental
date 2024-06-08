@@ -28,8 +28,7 @@ export class TopUpModalComponent {
     }
 
     topUp(): void {
-        // Implement the top-up logic here
-        console.log(`Topping up with amount: ${this.amount}`);
+        if (this.amount <= 0) return;
         this.dialogRef.close(this.amount);
     }
 }
