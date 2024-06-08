@@ -2,11 +2,28 @@
     <div class="w-full flex flex-col gap-4 items-center content-center justify-center mt-4 dark:text-white">
         <div class="flex flex-col items-center justify-center">
             <div class="rounded-t-lg md:rounded-lg bg-slate-300 dark:bg-slate-700 p-4">
-                <h1>Welcome back, <b>{{this.user?.first_name}} {{this.user?.last_name}}</b></h1>
+                <h1>Welcome back, 
+                    @if (user) {
+                        <b>{{this.user.first_name}} {{this.user.last_name}}
+                        </b>
+                    } @else {
+                        <div role="status" class="inline-flex animate-pulse">
+                            <div class="h-6 w-64 bg-gray-500 animate-pulse rounded-lg"></div>
+                        </div>
+                    }
+                </h1>
             </div>
             <div class="w-full md:w-fit rounded-b-lg bg-slate-300 dark:bg-slate-700 p-4 flex flex-row items-center justify-center gap-4">
-                <h2>Balance: <b>{{this.user?.wallet}}</b></h2>
-                <button [disabled]="performingTopUp"
+                <h2>Balance: 
+                    @if (user) {
+                        <b>{{this.user.wallet}}€</b>
+                    } @else {
+                        <div role="status" class="inline-flex animate-pulse">
+                            <div class="h-6 w-32 bg-gray-500 animate-pulse rounded-lg"></div>
+                        </div>
+                    }
+                </h2>
+                <button [disabled]="performingTopUp || !user"
                     class="rounded-lg bg-emerald-400 hover:bg-emerald-300 dark:bg-emerald-600 dark:hover:bg-emerald-700 shadow p-2"
                     (click)="topUpWallet()">{{performingTopUp? 'Topping up...' : 'Top up +'}}</button>
             </div>
