@@ -13,6 +13,7 @@ export class MovieDetailsComponent {
 
     movie: Movie | undefined;
     rentingIsDisabled: boolean = false;
+    isLoadingMovie: boolean = true;
 
     constructor(
         private route: ActivatedRoute,
@@ -25,9 +26,13 @@ export class MovieDetailsComponent {
             this.movieService.getMovieById(movieId).subscribe(movie => 
             {
                 this.movie = movie;
+                this.isLoadingMovie = false;
                 console.log(this.movie)
             },
-            error => console.log('Error whilst fetching movie', error)
+            error => {
+                console.log('Error whilst fetching movie', error)
+                this.isLoadingMovie = false;
+            }
         )
         }
     }
